@@ -1,0 +1,81 @@
+{% extends "users/base.html" %}
+
+{% block title %}VAT Flow - Twoje inteligentne wsparcie podatkowe{% endblock %}
+
+{% block content %}
+<div class="text-center my-5">
+    <h1 class="display-4 fw-bold">VAT Flow</h1>
+    <p class="lead">Nowoczesna aplikacja wspierająca Twoją firmę w rozliczeniach podatkowych</p>
+    {% if not user.is_authenticated %}
+    <div class="mt-4">
+        <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-2">Zarejestruj się</a>
+        <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg">Zaloguj się</a>
+    </div>
+    {% endif %}
+</div>
+
+<hr class="my-5">
+
+<div class="row text-center">
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="card-title text-primary">🔑 Logowanie i rejestracja</h4>
+                <p class="card-text">Prosty panel logowania i rejestracji dla szybkiego dostępu do systemu.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="card-title text-success">📄 Faktury</h4>
+                <p class="card-text">Tworzenie, edycja i przeglądanie faktur oraz upload plików PDF z automatycznym odczytem danych (OCR).</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="card-title text-warning">⚙️ Automatyzacja</h4>
+                <p class="card-text">System automatycznie księguje zdarzenia, generuje dokumenty, szyfruje i archiwizuje pliki.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row text-center">
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="card-title text-info">✅ Walidacja</h4>
+                <p class="card-text">Sprawdzanie poprawności NIP, dat i kwot, aby uniknąć błędów w dokumentach.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="card-title text-secondary">🔗 Integracje</h4>
+                <p class="card-text">Integracja z API: kursy walut, statusy faktur w e-Urzędzie Skarbowym i wiele innych.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="card-title text-danger">📊 Raporty i eksport</h4>
+                <p class="card-text">Eksport danych do CSV, PDF, Excela oraz generowanie raportów VAT i podsumowań finansowych.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center my-5">
+    <h3>📩 Powiadomienia i przypomnienia</h3>
+    <p class="text-muted">System wysyła automatyczne powiadomienia o zbliżających się terminach płatności podatków.</p>
+</div>
+{% endblock %}

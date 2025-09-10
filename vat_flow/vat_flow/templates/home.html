@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Panel - VAT Flow{% endblock %}
+{% block content %}
+<div class="container text-center">
+    <h2 class="mb-5">Witaj, {{ user.username }}!</h2>
+    <div class="row g-4 justify-content-center">
+        <!-- Kafelek Profil -->
+        <div class="col-md-4">
+            <a href="{% url 'profile' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <h4 class="card-title text-primary">Profil</h4>
+                        <p class="text-muted">Zarządzaj danymi firmy</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Kafelek Dane księgowe -->
+        <div class="col-md-4">
+            <a href="{% url 'invoices' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <h4 class="card-title text-success">Dane księgowe</h4>
+                        <p class="text-muted">Dodawaj i przeglądaj dokumenty</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Kafelek Symulacja VAT -->
+        <div class="col-md-4">
+            <a href="{% url 'vat_simulation' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <h4 class="card-title text-warning">Symulacja VAT</h4>
+                        <p class="text-muted">Wygeneruj deklarację</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

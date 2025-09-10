@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}VAT Flow{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Dodatkowy styl -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: "Inter", sans-serif;
+        }
+        .navbar-brand {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,.05);
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Nawigacja -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">VAT Flow</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <!-- Zakładki dostępne po zalogowaniu -->
+                        <li class="nav-item"><a class="nav-link" href="{% url 'invoices' %}">Dokumenty księgowe</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'vat_simulation' %}">Symulacja VAT</a></li>
+
+                        <!-- Powitanie i wylogowanie -->
+                        <li class="nav-item">
+                            <span class="nav-link">Witaj, {{ user.username }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-outline-light ms-2">Wyloguj się</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <!-- Linki dla niezalogowanych -->
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Logowanie</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Rejestracja</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Treść -->
+    <main class="flex-grow-1 py-5">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Stopka -->
+    <footer class="bg-dark text-light text-center py-3 mt-auto">
+        <p class="mb-0">&copy; {{ now|date:"Y" }} VAT Flow | Stworzone w Django</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
