@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "users",
     "vat_flow",
+    "dashboard",
 ]
 
 LOGIN_REDIRECT_URL = "/"
@@ -59,7 +60,7 @@ ROOT_URLCONF = "vat_flow.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

@@ -4,7 +4,7 @@
 <div class="container text-center">
     <h2 class="mb-5">Witaj, {{ user.username }}!</h2>
     <div class="row g-4 justify-content-center">
-        <!-- Kafelek Profil -->
+        <!-- Profile Tile -->
         <div class="col-md-4">
             <a href="{% url 'profile' %}" class="text-decoration-none">
                 <div class="card h-100 shadow-sm border-0">
@@ -16,7 +16,7 @@
             </a>
         </div>
 
-        <!-- Kafelek Dane księgowe -->
+        <!-- Accounting Data Tile -->
         <div class="col-md-4">
             <a href="{% url 'invoices' %}" class="text-decoration-none">
                 <div class="card h-100 shadow-sm border-0">
@@ -28,7 +28,7 @@
             </a>
         </div>
 
-        <!-- Kafelek Symulacja VAT -->
+        <!-- VAT Simulation Tile -->
         <div class="col-md-4">
             <a href="{% url 'vat_simulation' %}" class="text-decoration-none">
                 <div class="card h-100 shadow-sm border-0">
