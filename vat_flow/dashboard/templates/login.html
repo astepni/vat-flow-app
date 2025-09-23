@@ -1,21 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Rejestracja - VAT Flow{% endblock %}
+{% block title %}Logowanie - VAT Flow{% endblock %}
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
         <div class="card p-4">
-            <h2 class="text-center mb-4">Rejestracja</h2>
+            <h2 class="text-center mb-4">Logowanie</h2>
             <form method="post" novalidate>
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-success btn-lg">Zarejestruj się</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Zaloguj się</button>
                 </div>
             </form>
             <hr>
             <p class="text-center">
-                Masz już konto?
-                <a href="{% url 'login' %}">Zaloguj się</a>
+                Nie masz konta?
+                <a href="{% url 'register' %}">Zarejestruj się</a>
             </p>
         </div>
     </div>

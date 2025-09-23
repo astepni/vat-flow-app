@@ -29,30 +29,34 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">VAT Flow</a>
+            <a class="navbar-brand"
+               href="
+               {% if user.is_authenticated %}
+                   {% if request.resolver_match.url_name == 'dashboard_home' %}
+                       {% url 'landing' %}
+                   {% else %}
+                       {% url 'dashboard_home' %}
+                   {% endif %}
+               {% else %}
+                   {% url 'landing' %}
+               {% endif %}
+               ">VAT Flow</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
-                        <!-- Tabs available after login -->
-                        <li class="nav-item"><a class="nav-link" href="{% url 'invoices' %}">Dokumenty księgowe</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'vat_simulation' %}">Symulacja VAT</a></li>
-
-                        <!-- Welcome and logout -->
                         <li class="nav-item">
                             <span class="nav-link">Witaj, {{ user.username }}</span>
                         </li>
                         <li class="nav-item">
                             <form action="{% url 'logout' %}" method="post" class="d-inline">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-sm btn-outline-light ms-2">Wyloguj się</button>
+                                <button type="submit" class="btn btn-sm btn-outline-light">Wyloguj się</button>
                             </form>
                         </li>
                     {% else %}
-                        <!-- Links for not logged-in users -->
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Logowanie</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Rejestracja</a></li>
                     {% endif %}

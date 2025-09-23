@@ -1,0 +1,25 @@
+{% extends "users/base.html" %}
+{% block title %}Profil Firmowy - VAT Flow{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Twój Profil Firmowy</h2>
+                <p class="text-muted">Zaktualizuj dane swojej firmy, aby system działał poprawnie.</p>
+            </div>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.as_p }}
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+                        💾 Zapisz zmiany
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
