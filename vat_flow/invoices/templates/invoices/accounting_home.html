@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Strona główna - VAT Flow{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <!-- Page header -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold">📊 VAT Flow – Twoje dokumenty księgowe</h1>
+    <p class="text-muted fs-5">
+      Zarządzaj fakturami i dokumentami księgowymi w prosty i przejrzysty sposób.
+    </p>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <a href="{% url 'upload_invoice' %}" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+        ➕ Dodaj dokument księgowy
+      </a>
+      <a href="{% url 'invoice_list' %}" class="btn btn-outline-secondary btn-lg rounded-pill shadow-sm">
+        📑 Przeglądaj dokumenty
+      </a>
+    </div>
+  </div>
+
+  <!-- Information tiles -->
+  <div class="row g-4">
+    <!-- Tile 1 -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card shadow-sm border-0 h-100 rounded-4">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">📕 Co to jest dokument księgowy?</h5>
+          <p class="card-text small text-muted">
+            Dokument księgowy to podstawa do dokonania zapisu w księgach rachunkowych
+            (np. faktura VAT, rachunek, dowód wewnętrzny).
+            Potwierdza operację gospodarczą i umożliwia jej ewidencję.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tile 2 -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card shadow-sm border-0 h-100 rounded-4">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">💰 Dokumenty przychodowe VAT</h5>
+          <p class="card-text small text-muted">
+            Potwierdzają powstanie przychodu z tytułu sprzedaży.
+            Należą do nich m.in.: faktury VAT, faktury RR, rachunki,
+            dokumenty celne oraz raporty fiskalne.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tile 3 -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card shadow-sm border-0 h-100 rounded-4">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">📉 Dokumenty kosztowe VAT</h5>
+          <p class="card-text small text-muted">
+            Potwierdzają poniesienie kosztów i uprawniają do odliczenia VAT.
+            To m.in. faktury zakupowe, paragony z NIP, dokumenty celne
+            czy faktury w formie elektronicznej.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tile 4 -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card shadow-sm border-0 h-100 rounded-4">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">📝 Wymogi formalne faktur</h5>
+          <p class="card-text small text-muted">
+            Faktura musi zawierać m.in.: datę wystawienia, numer,
+            dane sprzedawcy i nabywcy, opis towaru/usługi,
+            stawkę i kwotę VAT, wartość netto i brutto.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
