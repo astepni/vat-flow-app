@@ -1,38 +1,38 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, ListView, TemplateView
 
 from .forms import InvoiceForm
 from .models import Invoice
 
 
-def accounting_home(request):
-    return render(request, "invoices/accounting_home.html")
+class AccountingHomeView(TemplateView):
+    template_name = "invoices/accounting_home.html"
 
 
-@login_required
-def upload_invoice(request):
-    if request.method == "POST":
-        form = InvoiceForm(request.POST, request.FILES)
-        if form.is_valid():
-            invoice = form.save(commit=False)
-            invoice.user = request.user
-            invoice.save()
-            return redirect("invoice_list")
-    else:
-        form = InvoiceForm()
-    return render(request, "upload_invoice.html", {"form": form})
+class UploadInvoiceView(LoginRequiredMixin, CreateView):
+    model = Invoice
+    form_class = InvoiceForm
+    template_name = "upload_invoice.html"
+    success_url = reverse_lazy("invoice_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
-@login_required
-def invoice_list(request):
-    invoices = Invoice.objects.filter(user=request.user)
-    return render(request, "invoice_list.html", {"invoices": invoices})
+class InvoiceListView(LoginRequiredMixin, ListView):
+    model = Invoice
+    template_name = "invoice_list.html"
+    context_object_name = "invoices"
+
+    def get_queryset(self):
+        return Invoice.objects.filter(user=self.request.user)
 
 
-@login_required
-def delete_invoice(request, pk):
-    invoice = get_object_or_404(Invoice, pk=pk, user=request.user)
-    invoice.delete()
-    return HttpResponseRedirect(reverse("invoice_list"))
+class DeleteInvoiceView(LoginRequiredMixin, DeleteView):
+    model = Invoice
+    success_url = reverse_lazy("invoice_list")
+
+    def get_queryset(self):
+        return Invoice.objects.filter(user=self.request.user)

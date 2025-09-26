@@ -1,10 +1,15 @@
 from django.urls import path
 
-from . import views
+from .views import (
+    AccountingHomeView,
+    DeleteInvoiceView,
+    InvoiceListView,
+    UploadInvoiceView,
+)
 
 urlpatterns = [
-    path("home/", views.accounting_home, name="accounting_home"),
-    path("upload/", views.upload_invoice, name="upload_invoice"),
-    path("list/", views.invoice_list, name="invoice_list"),
-    path("delete/<int:pk>/", views.delete_invoice, name="delete_invoice"),
+    path("", AccountingHomeView.as_view(), name="accounting_home"),
+    path("upload/", UploadInvoiceView.as_view(), name="upload_invoice"),
+    path("list/", InvoiceListView.as_view(), name="invoice_list"),
+    path("delete/<int:pk>/", DeleteInvoiceView.as_view(), name="delete_invoice"),
 ]
