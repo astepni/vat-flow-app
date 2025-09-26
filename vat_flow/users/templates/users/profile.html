@@ -1,25 +1,139 @@
 {% extends "users/base.html" %}
 {% block title %}Profil Firmowy - VAT Flow{% endblock %}
+
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
-        <div class="card shadow-lg border-0 rounded-4 p-4">
-            <div class="text-center mb-4">
-                <h2 class="fw-bold">Twój Profil Firmowy</h2>
-                <p class="text-muted">Zaktualizuj dane swojej firmy, aby system działał poprawnie.</p>
-            </div>
-            <form method="post" novalidate>
-                {% csrf_token %}
-                <div class="mb-3">
-                    {{ form.as_p }}
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg rounded-pill">
-                        💾 Zapisz zmiany
-                    </button>
-                </div>
-            </form>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+      <div class="card shadow-lg border-0 rounded-4 p-4">
+
+        <!-- Footer -->
+        <div class="text-center mb-4">
+          <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center"
+               style="width:70px; height:70px; font-size:32px;">
+            🏢
+          </div>
+          <h2 class="fw-bold mt-3">Twój Profil Firmowy</h2>
+          <p class="text-muted">Zaktualizuj dane swojej firmy, aby system działał poprawnie.</p>
         </div>
+
+        <!-- Form -->
+        <form method="post" class="profile-form" novalidate>
+          {% csrf_token %}
+
+          <div class="row mb-3 align-items-center">
+            <label for="{{ form.company_name.id_for_label }}" class="col-sm-4 col-form-label fw-semibold">
+              {{ form.company_name.label }}
+            </label>
+            <div class="col-sm-8">
+              {{ form.company_name }}
+              {% for error in form.company_name.errors %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label for="{{ form.nip.id_for_label }}" class="col-sm-4 col-form-label fw-semibold">
+              {{ form.nip.label }}
+            </label>
+            <div class="col-sm-8">
+              {{ form.nip }}
+              {% for error in form.nip.errors %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-start">
+            <label for="{{ form.address.id_for_label }}" class="col-sm-4 col-form-label fw-semibold">
+              {{ form.address.label }}
+            </label>
+            <div class="col-sm-8">
+              {{ form.address }}
+              {% for error in form.address.errors %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label for="{{ form.legal_form.id_for_label }}" class="col-sm-4 col-form-label fw-semibold">
+              {{ form.legal_form.label }}
+            </label>
+            <div class="col-sm-8">
+              {{ form.legal_form }}
+              {% for error in form.legal_form.errors %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label for="{{ form.start_date.id_for_label }}" class="col-sm-4 col-form-label fw-semibold">
+              {{ form.start_date.label }}
+            </label>
+            <div class="col-sm-8">
+              {{ form.start_date }}
+              {% for error in form.start_date.errors %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="row mb-3 align-items-center">
+            <label for="{{ form.regon.id_for_label }}" class="col-sm-4 col-form-label fw-semibold">
+              {{ form.regon.label }}
+            </label>
+            <div class="col-sm-8">
+              {{ form.regon }}
+              {% for error in form.regon.errors %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="row mb-4 align-items-center">
+            <label for="{{ form.vat_registered.id_for_label }}" class="col-sm-4 col-form-label fw-semibold">
+              {{ form.vat_registered.label }}
+            </label>
+            <div class="col-sm-8 d-flex align-items-center">
+              <div class="form-check form-switch">
+                {{ form.vat_registered }}
+              </div>
+              {% for error in form.vat_registered.errors %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Save button -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+              💾 Zapisz zmiany
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
+
+<!-- Bootstrap script for fields -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.profile-form input, .profile-form textarea, .profile-form select')
+    .forEach(function(el){
+      if (el.type !== 'checkbox' && el.type !== 'radio' && el.type !== 'hidden') {
+        el.classList.add('form-control', 'form-control-lg');
+      }
+      if (el.tagName.toLowerCase() === 'textarea') {
+        el.style.minHeight = '120px';
+      }
+      if (el.type === 'checkbox') {
+        el.classList.add('form-check-input');
+      }
+    });
+});
+</script>
 {% endblock %}
