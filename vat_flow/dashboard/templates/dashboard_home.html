@@ -4,6 +4,7 @@
 <div class="container text-center">
     <h2 class="mb-5">Witaj, {{ user.username }}!</h2>
     <div class="row g-4 justify-content-center">
+
         <!-- Profile Tile -->
         <div class="col-md-4">
             <a href="{% url 'profile' %}" class="text-decoration-none">
@@ -28,6 +29,18 @@
             </a>
         </div>
 
+        <!-- VAT Verification Tile -->
+        <div class="col-md-4">
+            <a href="{% url 'vat_verification' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <h4 class="card-title text-info">Weryfikacja kontrahenta</h4>
+                        <p class="text-muted">Biała lista podatników VAT</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
         <!-- VAT Simulation Tile -->
         <div class="col-md-4">
             <a href="{% url 'vat_simulation' %}" class="text-decoration-none">
@@ -41,5 +54,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

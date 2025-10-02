@@ -25,4 +25,9 @@ urlpatterns = [
         login_required(TemplateView.as_view(template_name="dashboard_home.html")),
         name="dashboard_home",
     ),
+    path(
+        "vat-verification/",
+        login_required(TemplateView.as_view(template_name="vat_verification.html")),
+        name="vat_verification",
+    ),
 ]

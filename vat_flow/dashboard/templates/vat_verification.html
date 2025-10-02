@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Weryfikacja kontrahenta - VAT Flow{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-info">Weryfikacja kontrahenta</h2>
+                <p class="text-muted">Sprawdź, czy kontrahent znajduje się na <strong>Białej liście podatników VAT</strong>.</p>
+            </div>
+
+            <!-- Form -->
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="nip" class="form-label fw-semibold">NIP kontrahenta</label>
+                    <input type="text" class="form-control form-control-lg" id="nip" name="nip" placeholder="Wpisz NIP, np. 1234567890" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-info btn-lg rounded-pill">
+                        🔍 Sprawdź kontrahenta
+                    </button>
+                </div>
+            </form>
+
+            <!-- Verification result -->
+            {% if result %}
+                <div class="alert alert-{{ result.status }} mt-4" role="alert">
+                    {{ result.message }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
