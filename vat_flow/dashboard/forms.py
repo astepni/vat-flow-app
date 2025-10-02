@@ -14,6 +14,7 @@ class ProfileForm(forms.ModelForm):
             "start_date",
             "regon",
             "vat_registered",
+            "vat_period",
         ]
         widgets = {
             "start_date": forms.DateInput(attrs={"type": "date"}),
