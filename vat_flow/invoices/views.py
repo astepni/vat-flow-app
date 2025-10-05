@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, TemplateView
+from vat_simulation.models import Faktura
 
 from .forms import InvoiceForm
 from .models import Invoice
@@ -36,3 +37,17 @@ class DeleteInvoiceView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return Invoice.objects.filter(user=self.request.user)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        faktury = Faktura.objects.filter(invoice=self.object)
+        print(
+            f"Usuwanie faktur dla Invoice={self.object.pk}, typ: {self.object.invoice_type}"
+        )
+        print(f"Powiązane Faktury: {faktury.count()}")
+        for f in faktury:
+            print(f" - Faktura: {f}")
+        faktury.delete()
+        response = super().delete(request, *args, **kwargs)
+        print(f"Invoice usunięty: {self.object.pk}")
+        return response

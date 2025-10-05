@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "vat_flow",
     "dashboard",
     "invoices",
+    "vat_simulation",
 ]
 
 LOGIN_REDIRECT_URL = "/"

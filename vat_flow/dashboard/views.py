@@ -61,7 +61,7 @@ class InvoiceListView(TemplateView):
 
 
 class VatSimulationView(TemplateView):
-    template_name = "users/vat_simulation.html"
+    template_name = "vat_simulation/vat_simulation.html"
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
