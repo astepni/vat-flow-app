@@ -33,7 +33,10 @@ urlpatterns = [
         name="home",
     ),
     path("invoices/", include("invoices.urls")),
-    path("dashboard/vat-simulation/", include("vat_simulation.urls")),
+    path(
+        "dashboard/vat-simulation/",
+        include(("vat_simulation.urls", "vat_simulation"), namespace="vat_simulation"),
+    ),
 ]
 
 if settings.DEBUG:

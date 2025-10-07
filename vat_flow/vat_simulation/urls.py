@@ -1,6 +1,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
+from .vat_calculation_views import VatCalculationView
 from .views import (
     ApproveInvoiceView,
     DeleteInvoiceView,
@@ -30,4 +31,10 @@ urlpatterns = [
     path("invoices/", InvoiceListView.as_view(), name="invoices"),
     path("usun-fakture/<int:pk>/", DeleteInvoiceView.as_view(), name="usun_fakture"),
     path("export-excel/", ExportExcelView.as_view(), name="export_excel"),
+    path(
+        "dashboard/vat-simulation/",
+        VatCalculationView.as_view(),
+        name="vat_calculation",
+    ),
+    path("vat-calculation/", VatCalculationView.as_view(), name="vat_calculation"),
 ]
