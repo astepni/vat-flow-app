@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, TemplateView
@@ -5,6 +7,8 @@ from vat_simulation.models import Faktura
 
 from .forms import InvoiceForm
 from .models import Invoice
+
+logger = logging.getLogger(__name__)
 
 
 class AccountingHomeView(TemplateView):
@@ -41,13 +45,14 @@ class DeleteInvoiceView(LoginRequiredMixin, DeleteView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         faktury = Faktura.objects.filter(invoice=self.object)
-        print(
+        logger.info(
             f"Usuwanie faktur dla Invoice={self.object.pk}, typ: {self.object.invoice_type}"
         )
-        print(f"Powiązane Faktury: {faktury.count()}")
+        logger.info(f"Powiązane Faktury: {faktury.count()}")
         for f in faktury:
-            print(f" - Faktura: {f}")
+            logger.info(f" - Faktura: {f}")
         faktury.delete()
         response = super().delete(request, *args, **kwargs)
-        print(f"Invoice usunięty: {self.object.pk}")
+        logger.info(f"Invoice usunięty: {self.object.pk}")
+
         return response
