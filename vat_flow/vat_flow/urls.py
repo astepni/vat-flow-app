@@ -37,6 +37,7 @@ urlpatterns = [
         "dashboard/vat-simulation/",
         include(("vat_simulation.urls", "vat_simulation"), namespace="vat_simulation"),
     ),
+    path("api/", include(("api.urls", "api"), namespace="api")),
 ]
 
 if settings.DEBUG:
