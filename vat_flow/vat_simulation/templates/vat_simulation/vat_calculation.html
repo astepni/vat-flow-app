@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Uproszczona kalkulacja VAT</h2>
+
+    <form method="get" class="mb-4 row g-3 align-items-end">
+        <div class="col-md-4">
+            {{ form.okres.label_tag }} {{ form.okres }}
+        </div>
+        <div class="col-md-4">
+            {{ form.nadwyzka_z_poprzedniej.label_tag }} {{ form.nadwyzka_z_poprzedniej }}
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Przelicz</button>
+        </div>
+    </form>
+
+    <!-- Output tax settlement -->
+    <table class="table table-bordered mb-4">
+        <thead class="table-light">
+            <tr><th colspan="3">Rozliczenie podatku należnego</th></tr>
+            <tr>
+                <th>Nazwa</th>
+                <th>Podstawa opodatkowania</th>
+                <th>Podatek należny</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Łączna wysokość podstawy opodatkowania</td>
+                <td>{{ suma_netto_sprzedaz }}</td>
+                <td>{{ suma_vat_sprzedaz }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Input tax settlement -->
+    <table class="table table-bordered mb-4">
+        <thead class="table-light">
+            <tr><th colspan="3">Rozliczenie podatku naliczonego</th></tr>
+            <tr>
+                <th>Nazwa</th>
+                <th>Wartość netto</th>
+                <th>Podatek naliczony</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Wysokość nadwyżki podatku naliczonego nad należnym z poprzedniej deklaracji*</td>
+                <td colspan="2">
+                    {{ form.nadwyzka_z_poprzedniej.value|default:0 }}
+                </td>
+            </tr>
+            <tr>
+                <td>Łączna wysokość podatku naliczonego do odliczenia</td>
+                <td></td>
+                <td>{{ suma_vat_zakup }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Calculation of tax liability / tax refund -->
+    <table class="table table-bordered mb-4">
+        <thead class="table-light">
+            <tr>
+                <th>Nazwa</th>
+                <th>Wartość</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Wysokość podatku podlegająca wpłacie do urzędu skarbowego</td>
+                <td>{{ do_zaplaty }}</td>
+            </tr>
+            <tr>
+                <td>Wysokość nadwyżki podatku naliczonego nad należnym</td>
+                <td>{{ nadwyzka }}</td>
+            </tr>
+            <tr>
+                <td>Wysokość nadwyżki do przeniesienia na następny okres rozliczeniowy</td>
+                <td>{{ nadwyzka }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Tax due information -->
+    {% if do_zaplaty > 0 %}
+    <div class="alert alert-info mb-3">
+        Masz podatek do zapłaty w kwocie: <strong>{{ do_zaplaty }}</strong>
+    </div>
+    {% elif nadwyzka > 0 %}
+    <div class="alert alert-success mb-3">
+        Masz podatek VAT do zwrotu w kwocie: <strong>{{ nadwyzka }}</strong>
+    </div>
+    {% endif %}
+    <!-- Stały komunikat -->
+    <div class="alert alert-warning">
+        *Każda deklaracja VAT (JPK_V7M lub JPK_V7K) daje prawo przeniesienia nadwyżki podatku naliczonego (z zakupów) nad należnym (ze sprzedaży) na kolejny okres, jeśli nie występujesz o zwrot na konto.
+W kolejnym miesiącu możesz tę kwotę wykazać jako „nadwyżka z poprzedniej deklaracji” — zmniejsza ona kwotę podatku do zapłaty w bieżącym okresie rozliczeniowym (lub powiększa nadwyżkę do rozliczenia na przyszłość). Jeśli chcesz wpisać kwotę nadwyżki podatku naliczonego nad należnym z poprzednich okresów rozliczeniowych w celu pomniejszenia zobowiązania podatkowego za bieżący okres, wprowadź właściwą kwotę w polu „Nadwyżka z poprzedniej deklaracji:”.
+
+    </div>
+</div>
+{% endblock %}
+

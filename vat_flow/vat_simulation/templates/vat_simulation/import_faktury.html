@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Import faktur</title>
+</head>
+<body>
+    <h1>Import faktur z pliku CSV</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Załaduj plik</button>
+    </form>
+
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <p><strong>Uwaga:</strong> Plik CSV musi zawierać kolumny z nazwami zgodnymi z tabelą faktur (np. "Data wystawienia", "Numer faktury" itp.).</p>
+</body>
+</html>
