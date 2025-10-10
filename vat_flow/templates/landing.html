@@ -5,7 +5,7 @@
 {% block content %}
 <div class="text-center my-5">
     <h1 class="display-4 fw-bold">VAT Flow</h1>
-    <p class="lead">Nowoczesna aplikacja wspierająca Twoją firmę w rozliczeniach podatkowych</p>
+    <p class="lead">Nowoczesna aplikacja wspierająca Twoją firmę w rozliczeniu podatku VAT. Rozliczanie VAT jeszcze nigdy nie było tak proste. Poznaj narzędzia, które oszczędzają Twój czas i gwarantują pewność rozliczeń.</p>
     {% if not user.is_authenticated %}
     <div class="mt-4">
         <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-2">Zarejestruj się</a>
@@ -16,12 +16,27 @@
 
 <hr class="my-5">
 
+<div class="row justify-content-center mb-5">
+    <div class="col-md-8">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="card-title text-primary">💡 Ekspresowa kalkulacja zobowiązania podatku VAT</h4>
+                <p class="card-text">
+                    Szybko poznaj kwotę podatku VAT do zapłaty lub przeniesienia nadwyżki na kolejny miesiąc. Bierz pełną kontrolę nad budżetem i planuj swoje finanse bez stresu.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="row text-center">
     <div class="col-md-4 mb-4">
         <div class="card shadow-sm h-100">
             <div class="card-body">
                 <h4 class="card-title text-primary">🔑 Logowanie i rejestracja</h4>
-                <p class="card-text">Prosty panel logowania i rejestracji dla szybkiego dostępu do systemu.</p>
+                <p class="card-text">Błyskawiczny start — zarejestruj się lub zaloguj w kilka sekund i korzystaj z wszystkich możliwości systemu. </p>
             </div>
         </div>
     </div>
@@ -30,7 +45,7 @@
         <div class="card shadow-sm h-100">
             <div class="card-body">
                 <h4 class="card-title text-success">📄 Faktury</h4>
-                <p class="card-text">Tworzenie, edycja i przeglądanie faktur oraz upload plików PDF z automatycznym odczytem danych (OCR).</p>
+                <p class="card-text">Dodawaj i przeglądaj faktury PDF — wszystkie dane wczytają się automatycznie..</p>
             </div>
         </div>
     </div>
@@ -39,7 +54,7 @@
         <div class="card shadow-sm h-100">
             <div class="card-body">
                 <h4 class="card-title text-warning">⚙️ Automatyzacja</h4>
-                <p class="card-text">System automatycznie księguje zdarzenia, generuje dokumenty, szyfruje i archiwizuje pliki.</p>
+                <p class="card-text">Automatyczne pobieranie danych — już nigdy nie wypełniaj ręcznie informacji o fakturach.</p>
             </div>
         </div>
     </div>
@@ -49,8 +64,8 @@
     <div class="col-md-4 mb-4">
         <div class="card shadow-sm h-100">
             <div class="card-body">
-                <h4 class="card-title text-info">✅ Walidacja</h4>
-                <p class="card-text">Sprawdzanie poprawności NIP, dat i kwot, aby uniknąć błędów w dokumentach.</p>
+                <h4 class="card-title text-info">✅ Rejestry VAT Sprzedaży i Zakupów</h4>
+                <p class="card-text">Generuj rejestry VAT jednym kliknięciem, bazując na automatycznie zaczytanych fakturach.</p>
             </div>
         </div>
     </div>
@@ -59,7 +74,7 @@
         <div class="card shadow-sm h-100">
             <div class="card-body">
                 <h4 class="card-title text-secondary">🔗 Integracje</h4>
-                <p class="card-text">Integracja z API: kursy walut, statusy faktur w e-Urzędzie Skarbowym i wiele innych.</p>
+                <p class="card-text">Weryfikuj kontrahenta z bazą Ministerstwa Finansów — pewność na każdym etapie współpracy.</p>
             </div>
         </div>
     </div>
@@ -68,14 +83,14 @@
         <div class="card shadow-sm h-100">
             <div class="card-body">
                 <h4 class="card-title text-danger">📊 Raporty i eksport</h4>
-                <p class="card-text">Eksport danych do CSV, PDF, Excela oraz generowanie raportów VAT i podsumowań finansowych.</p>
+                <p class="card-text">Eksportuj dane do Excela i analizuj VAT wtedy, gdy chcesz — szybko i bez komplikacji.</p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="text-center my-5">
-    <h3>📩 Powiadomienia i przypomnienia</h3>
-    <p class="text-muted">System wysyła automatyczne powiadomienia o zbliżających się terminach płatności podatków.</p>
+    <h3>📩 VAT Alert: Powiadomienie i przypomnienie o konieczności dokonania płatności podatku VAT</h3>
+    <p class="text-muted">Nie przegapisz żadnego terminu — automatycznie przypomnimy Ci o płatności VAT.</p>
 </div>
 {% endblock %}

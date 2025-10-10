@@ -3,6 +3,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from .views import (
+    DashboardView,
     InvoiceListView,
     ProfileView,
     UserLoginView,
@@ -22,7 +23,7 @@ urlpatterns = [
     path("vat-simulation/", VatSimulationView.as_view(), name="vat_simulation"),
     path(
         "",
-        login_required(TemplateView.as_view(template_name="dashboard_home.html")),
+        login_required(DashboardView.as_view(template_name="dashboard_home.html")),
         name="dashboard_home",
     ),
 ]

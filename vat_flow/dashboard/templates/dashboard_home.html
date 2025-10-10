@@ -2,6 +2,7 @@
 {% block title %}Panel - VAT Flow{% endblock %}
 {% block content %}
 <div class="container text-center">
+
     <h2 class="mb-5">Witaj, {{ user.username }}!</h2>
     <div class="row g-4 justify-content-center">
 
@@ -53,5 +54,24 @@
             </a>
         </div>
     </div>
+</div>
+</div>
+
+<div class="container mt-4">
+    <div class="alert alert-info">
+        Termin płatności podatku VAT to 25-ty dzień miesiąca następujący po okresie rozliczeniowym. Jeśli 25-ty dzień miesiąca przypada na dzień ustawowo wolny od pracy, wówczas terminem płatności podatku jest pierwszy dzień roboczy następujący po dniu lub dniach wolnych od pracy.
+    </div>
+    {% if days_left is not None %}
+        <div class="alert alert-warning my-3">
+            {% if days_left > 0 %}
+                Płatność podatku VAT za <b>{{ vat_period }}</b> należy uiścić do <b>{{ deadline_date }}</b>!
+                (<span>Ilość dni do terminu: {{ days_left }}</span>)
+            {% elif days_left == 0 %}
+                Dziś upływa termin płatności podatku VAT za <b>{{ vat_period }}</b>! ({{ deadline_date }})
+            {% else %}
+                Termin płatności podatku VAT za <b>{{ vat_period }}</b> minął! ({{ deadline_date }})
+            {% endif %}
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
