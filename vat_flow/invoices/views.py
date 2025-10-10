@@ -40,11 +40,15 @@ class DeleteInvoiceView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("invoice_list")
 
     def get_queryset(self):
-        return Invoice.objects.filter(user=self.request.user)
+        return Invoice.objects.filter(
+            user=self.request.user
+        )  # TODO: Invoice vs Faktura (segreggation)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        faktury = Faktura.objects.filter(invoice=self.object)
+        faktury = Faktura.objects.filter(
+            invoice=self.object
+        )  # TODO: all vars & logging should be in English
         logger.info(
             f"Usuwanie faktur dla Invoice={self.object.pk}, typ: {self.object.invoice_type}"
         )

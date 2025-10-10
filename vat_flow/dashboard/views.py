@@ -33,7 +33,7 @@ class UserLogoutView(LogoutView):
     next_page = reverse_lazy("login")
 
 
-class UserSerializer(ModelSerializer):
+class UserSerializer(ModelSerializer):  # TODO: move out to serializers.py
     class Meta:
         model = User
         fields = ["id", "username", "email"]
