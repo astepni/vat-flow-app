@@ -79,13 +79,6 @@ class DashboardView(TemplateView):
     template_name = "dashboard_home.html"
 
     PUBLIC_HOLIDAYS = [
-        (1, 1),
-        (1, 6),
-        (5, 1),
-        (5, 3),
-        (8, 15),
-        (11, 1),
-        (11, 11),
         (12, 25),
         (12, 26),
     ]
