@@ -42,9 +42,10 @@ class NIPVerificationView(View):
                 )
                 if resp.status_code == 200:
                     data = resp.json()
-                    if "result" in data and "subject" in data["result"]:
-                        name = data["result"]["subject"].get("name")
-                        statusvat = data["result"]["subject"].get("statusVat")
+                    subject = data.get("result", {}).get("subject")
+                    if subject:
+                        name = subject.get("name")
+                        statusvat = subject.get("statusVat")
                         result = {
                             "status": "success",
                             "message": f"Nazwa: {name}, Status VAT: {statusvat}",
@@ -52,8 +53,15 @@ class NIPVerificationView(View):
                     else:
                         result = {
                             "status": "danger",
-                            "message": data.get("message", "Brak danych lub błąd API"),
+                            "message": data.get(
+                                "message", "Brak firmy o podanym NIP w bazie MF."
+                            ),
                         }
+                elif resp.status_code == 400:
+                    result = {
+                        "status": "danger",
+                        "message": "Brak firmy o podanym NIP w bazie MF.",
+                    }
                 else:
                     result = {
                         "status": "danger",
