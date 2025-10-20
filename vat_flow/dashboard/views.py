@@ -78,13 +78,8 @@ class LandingPageView(TemplateView):
 class DashboardView(TemplateView):
     template_name = "dashboard_home.html"
 
-    PUBLIC_HOLIDAYS = [
-        (12, 25),
-        (12, 26),
-    ]
-
     def _is_holiday(self, date):
-        return date.weekday() >= 5 or (date.month, date.day) in self.PUBLIC_HOLIDAYS
+        return date.weekday() >= 5
 
     def _get_next_workday(self, date):
         while self._is_holiday(date):
