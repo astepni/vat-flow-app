@@ -8,10 +8,10 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView, UpdateView
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.serializers import ModelSerializer
 
 from .forms import ProfileForm
 from .models import Profile
+from .serializers import UserSerializer
 
 
 class UserRegisterView(CreateView):
@@ -31,12 +31,6 @@ class UserLoginView(LoginView):
 
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy("login")
-
-
-class UserSerializer(ModelSerializer):  # TODO: move out to serializers.py
-    class Meta:
-        model = User
-        fields = ["id", "username", "email"]
 
 
 class UsersListAPIView(generics.ListAPIView):
