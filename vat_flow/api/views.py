@@ -42,7 +42,11 @@ class NIPVerificationView(View):
                 )
                 if resp.status_code == 200:
                     data = resp.json()
-                    if "result" in data and "subject" in data["result"]:
+                    if (
+                        "result" in data
+                        and "subject" in data["result"]
+                        and data["result"]["subject"] is not None
+                    ):
                         name = data["result"]["subject"].get("name")
                         statusvat = data["result"]["subject"].get("statusVat")
                         result = {
