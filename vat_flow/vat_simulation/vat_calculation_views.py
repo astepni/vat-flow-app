@@ -22,7 +22,7 @@ class OkresForm(forms.Form):
         label="Nadwyżka z poprzedniej deklaracji",
         initial=0,
         required=False,
-        min_value=1,
+        min_value=0,
         error_messages={"min_value": "Nie można wskazać liczby mniejszej niż 1 zł."},
         help_text="Podaj całą kwotę (w zł), bez groszy. Pole może być puste.",
     )
