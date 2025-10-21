@@ -3,7 +3,7 @@ import logging
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, TemplateView
-from vat_simulation.models import Faktura
+from vat_simulation.models import BillingRecord
 
 from .forms import InvoiceForm
 from .models import Invoice
@@ -40,21 +40,17 @@ class DeleteInvoiceView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("invoice_list")
 
     def get_queryset(self):
-        return Invoice.objects.filter(
-            user=self.request.user
-        )  # TODO: Invoice vs Faktura (segreggation)
+        return Invoice.objects.filter(user=self.request.user)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        faktury = Faktura.objects.filter(
-            invoice=self.object
-        )  # TODO: all vars & logging should be in English
+        faktury = BillingRecord.objects.filter(invoice=self.object)
         logger.info(
             f"Usuwanie faktur dla Invoice={self.object.pk}, typ: {self.object.invoice_type}"
         )
         logger.info(f"Powiązane Faktury: {faktury.count()}")
         for f in faktury:
-            logger.info(f" - Faktura: {f}")
+            logger.info(f" - BillingRecord: {f}")
         faktury.delete()
         response = super().delete(request, *args, **kwargs)
         logger.info(f"Invoice usunięty: {self.object.pk}")
