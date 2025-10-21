@@ -3,7 +3,7 @@ from datetime import datetime
 from django import forms
 
 
-class OkresForm(forms.Form):  # TODO: move out to forms.py
+class OkresForm(forms.Form):
     okres = forms.ChoiceField(
         choices=[
             (f"{y}-{m:02d}", f"{y}-{m:02d}")

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import path
+from django.urls import include, path
 from django.views.generic import TemplateView
 
 from .views import (
@@ -24,5 +24,14 @@ urlpatterns = [
         "",
         login_required(TemplateView.as_view(template_name="dashboard_home.html")),
         name="dashboard_home",
+    ),
+    path(
+        "dashboard/",
+        login_required(TemplateView.as_view(template_name="home.html")),
+        name="home",
+    ),
+    path(
+        "dashboard/vat-simulation/",
+        include(("vat_simulation.urls", "vat_simulation"), namespace="vat_simulation"),
     ),
 ]
