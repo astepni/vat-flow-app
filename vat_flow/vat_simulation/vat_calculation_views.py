@@ -1,26 +1,12 @@
 from datetime import datetime
 from decimal import Decimal
 
-from django import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.views.generic import TemplateView
 
+from .forms import OkresForm
 from .models import Faktura
-
-
-class OkresForm(forms.Form):  # TODO: move out to forms.py
-    okres = forms.ChoiceField(
-        choices=[
-            (f"{y}-{m:02d}", f"{y}-{m:02d}")
-            for y in range(datetime.now().year - 1, datetime.now().year + 1)
-            for m in range(1, 13)
-        ],
-        label="Okres rozliczeniowy",
-    )
-    nadwyzka_z_poprzedniej = forms.DecimalField(
-        label="Nadwyżka z poprzedniej deklaracji", initial=0, required=False
-    )
 
 
 class VatCalculationView(LoginRequiredMixin, TemplateView):
