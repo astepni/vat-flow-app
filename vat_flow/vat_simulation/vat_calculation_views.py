@@ -9,7 +9,7 @@ from django.views.generic import TemplateView
 from .models import Faktura
 
 
-class OkresForm(forms.Form):
+class OkresForm(forms.Form):  # TODO: move out to forms.py
     okres = forms.ChoiceField(
         choices=[
             (f"{y}-{m:02d}", f"{y}-{m:02d}")

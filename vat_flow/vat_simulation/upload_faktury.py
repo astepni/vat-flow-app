@@ -1,7 +1,7 @@
 from .models import Invoice
 
 
-def add_invoice(parsed_data, user, typ):
+def add_invoice(parsed_data, user, typ):  # TODO: remove
     faktura = Invoice.objects.create(
         typ=typ,
         user=user,
