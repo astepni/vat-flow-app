@@ -5,12 +5,12 @@ from django.db import models
 from invoices.models import Invoice
 
 
-class Faktura(models.Model):
-    TYP_FAKTURY = (
+class BillingRecord(models.Model):
+    INVOICE_TYPE_CHOICES = (
         ("sprzedazowa", "Sprzedażowa"),
         ("kosztowa", "Kosztowa"),
     )
-    typ = models.CharField(max_length=20, choices=TYP_FAKTURY)
+    typ = models.CharField(max_length=20, choices=INVOICE_TYPE_CHOICES)
     plik_pdf = models.FileField(upload_to="faktury_pdfs/")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     invoice = models.ForeignKey(
@@ -30,7 +30,7 @@ class Faktura(models.Model):
     suma_netto = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     suma_vat = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     suma_brutto = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    rodzaj = models.CharField(max_length=20, choices=TYP_FAKTURY)
+    rodzaj = models.CharField(max_length=20, choices=INVOICE_TYPE_CHOICES)
 
     def __str__(self):
         return f"{self.numer} ({self.rodzaj})"

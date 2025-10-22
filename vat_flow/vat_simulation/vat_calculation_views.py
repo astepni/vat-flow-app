@@ -6,10 +6,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.views.generic import TemplateView
 
-from .models import Faktura
+from .models import BillingRecord
 
 
-class OkresForm(forms.Form):  # TODO: move out to forms.py
+class OkresForm(forms.Form):
     okres = forms.ChoiceField(
         choices=[
             (f"{y}-{m:02d}", f"{y}-{m:02d}")
@@ -48,7 +48,7 @@ class VatCalculationView(LoginRequiredMixin, TemplateView):
         except Exception:
             year, month = datetime.now().year, datetime.now().month
 
-        sprzedaz = Faktura.objects.filter(
+        sprzedaz = BillingRecord.objects.filter(
             user=request.user,
             typ="sprzedazowa",
             data_sprzedazy__year=year,
@@ -59,7 +59,7 @@ class VatCalculationView(LoginRequiredMixin, TemplateView):
         )
         suma_vat_sprzedaz = sprzedaz.aggregate(Sum("suma_vat"))["suma_vat__sum"] or 0
 
-        zakup = Faktura.objects.filter(
+        zakup = BillingRecord.objects.filter(
             user=request.user,
             typ="kosztowa",
             data_sprzedazy__year=year,

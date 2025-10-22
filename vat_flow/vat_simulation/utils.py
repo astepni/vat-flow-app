@@ -4,24 +4,24 @@ from datetime import datetime
 
 import fitz
 
-from .models import Faktura
+from .models import BillingRecord
 
 
 class Utils:
     @staticmethod
     def to_float_safe(val, label=""):
         if val is None or val == "":
-            print(f"Brak wartości w polu {label}")
+            print(f"Missing value in field {label}")
             return 0
         val = str(val).replace(" ", "").replace(",", ".")
         try:
             return float(val)
         except Exception:
-            print(f"Nieprawidłowa wartość '{val}' w polu {label}")
+            print(f"Invalid value '{val}' in field {label}")
             return 0
 
 
-class FakturaParser:
+class InvoiceParser:
     def __init__(self, pdf_path: str):
         self.pdf_path = pdf_path
         self.text = self._extract_text()
@@ -66,7 +66,7 @@ class FakturaParser:
         }
 
 
-class FakturaCSVImporter:
+class InvoiceCSVImporter:
     def __init__(self, csv_path):
         self.csv_path = csv_path
 
@@ -78,13 +78,13 @@ class FakturaCSVImporter:
                 continue
         return None
 
-    def import_faktury(self):
+    def import_invoices(self):
         with open(self.csv_path, newline="", encoding="utf-8-sig") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 data_wystawienia = self.parse_date(row["Data wystawienia"])
                 data_sprzedazy = self.parse_date(row.get("Data sprzedaży", ""))
-                Faktura.objects.update_or_create(
+                BillingRecord.objects.update_or_create(
                     numer=row["Numer faktury"],
                     defaults={
                         "data_wystawienia": data_wystawienia,
@@ -92,31 +92,31 @@ class FakturaCSVImporter:
                         "kontrahent": row.get("Kontrahent"),
                         "adres_siedziba": row.get("Adres (siedziba)"),
                         "nip": row.get("NIP"),
-                        "wart_netto_8": to_float_safe(
+                        "wart_netto_8": Utils.to_float_safe(
                             row.get("Wartość netto 8%"), "Wartość netto 8%"
                         ),
-                        "podatek_vat_8": to_float_safe(
+                        "podatek_vat_8": Utils.to_float_safe(
                             row.get("Podatek VAT 8%"), "Podatek VAT 8%"
                         ),
-                        "wart_brutto_8": to_float_safe(
+                        "wart_brutto_8": Utils.to_float_safe(
                             row.get("Wartość brutto 8%"), "Wartość brutto 8%"
                         ),
-                        "wart_netto_23": to_float_safe(
+                        "wart_netto_23": Utils.to_float_safe(
                             row.get("Wartość netto 23%"), "Wartość netto 23%"
                         ),
-                        "podatek_vat_23": to_float_safe(
+                        "podatek_vat_23": Utils.to_float_safe(
                             row.get("Podatek VAT 23%"), "Podatek VAT 23%"
                         ),
-                        "wart_brutto_23": to_float_safe(
+                        "wart_brutto_23": Utils.to_float_safe(
                             row.get("Wartość brutto 23%"), "Wartość brutto 23%"
                         ),
-                        "suma_wart_netto": to_float_safe(
+                        "suma_wart_netto": Utils.to_float_safe(
                             row.get("Suma wartość netto"), "Suma wartość netto"
                         ),
-                        "suma_podatek_vat": to_float_safe(
+                        "suma_podatek_vat": Utils.to_float_safe(
                             row.get("Suma podatek VAT"), "Suma podatek VAT"
                         ),
-                        "suma_wart_brutto": to_float_safe(
+                        "suma_wart_brutto": Utils.to_float_safe(
                             row.get("Suma wartość brutto"), "Suma wartość brutto"
                         ),
                     },

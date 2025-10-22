@@ -14,8 +14,8 @@ from django.views.generic.edit import FormView
 from invoices.models import Invoice
 from openpyxl.utils import get_column_letter
 
-from .models import Faktura
-from .utils import FakturaCSVImporter, FakturaParser
+from .models import BillingRecord
+from .utils import InvoiceCSVImporter, InvoiceParser
 
 
 class VATViewRegister(TemplateView):
@@ -26,7 +26,7 @@ class VATViewRegister(TemplateView):
         data_od = self.request.GET.get("data_od")
         data_do = self.request.GET.get("data_do")
 
-        faktury = Faktura.objects.all()
+        faktury = BillingRecord.objects.all()
         if data_od and data_do:
             faktury = faktury.filter(data_sprzedazy__range=[data_od, data_do])
 
@@ -35,7 +35,7 @@ class VATViewRegister(TemplateView):
 
         sprzedazowe_lista = []
         for f in sprzedazowe:
-            dane = FakturaParser(f.plik_pdf.path).get_data()
+            dane = InvoiceParser(f.plik_pdf.path).get_data()
             sprzedazowe_lista.append(
                 {
                     **dane,
@@ -46,7 +46,7 @@ class VATViewRegister(TemplateView):
 
         kosztowe_lista = []
         for f in kosztowe:
-            dane = FakturaParser(f.plik_pdf.path).get_data()
+            dane = InvoiceParser(f.plik_pdf.path).get_data()
             kosztowe_lista.append(
                 {
                     **dane,
@@ -66,7 +66,7 @@ class VatViewSimulation(LoginRequiredMixin, View):
     template_name = "vat_simulation/vat_simulation.html"
 
     def get(self, request):
-        faktury = Faktura.objects.filter(user=request.user).order_by(
+        faktury = BillingRecord.objects.filter(user=request.user).order_by(
             "-data_wystawienia"
         )
         context = {
@@ -80,7 +80,7 @@ class VatViewSimulation(LoginRequiredMixin, View):
         return render(request, self.template_name, context)
 
     def post(self, request):
-        faktury = Faktura.objects.filter(user=request.user).order_by(
+        faktury = BillingRecord.objects.filter(user=request.user).order_by(
             "-data_wystawienia"
         )
         okres_start = request.POST.get("okres_start")
@@ -94,7 +94,7 @@ class VatViewSimulation(LoginRequiredMixin, View):
             data_koniec = datetime.strptime(okres_koniec, "%Y-%m-%d").date()
 
             vat_przychodowy = (
-                Faktura.objects.filter(
+                BillingRecord.objects.filter(
                     user=request.user,
                     typ="sprzedazowa",
                     data_wystawienia__range=(data_start, data_koniec),
@@ -103,7 +103,7 @@ class VatViewSimulation(LoginRequiredMixin, View):
             )
 
             vat_kosztowy = (
-                Faktura.objects.filter(
+                BillingRecord.objects.filter(
                     user=request.user,
                     typ="kosztowa",
                     data_wystawienia__range=(data_start, data_koniec),
@@ -140,7 +140,7 @@ class ImportInvoicesView(FormView):
         with open("temp.csv", "wb+") as temp_file:
             for chunk in csv_file.chunks():
                 temp_file.write(chunk)
-        importer = FakturaCSVImporter("temp.csv")
+        importer = InvoiceCSVImporter("temp.csv")
         importer.import_faktury()
         return super().form_valid(form)
 
@@ -148,7 +148,7 @@ class ImportInvoicesView(FormView):
 class ApproveInvoiceView(View):
     def post(self, request, pk, *args, **kwargs):
         invoice = get_object_or_404(Invoice, pk=pk)
-        dane = FakturaParser(invoice.pdf.path).get_data()
+        dane = InvoiceParser(invoice.pdf.path).get_data()
         raw_data_wystawienia = dane.get("data_wystawienia")
         raw_data_sprzedazy = dane.get("data_sprzedazy")
 
@@ -182,12 +182,14 @@ class ApproveInvoiceView(View):
                 status=400,
             )
 
-        if Faktura.objects.filter(numer=dane.get("numer"), user=invoice.user).exists():
+        if BillingRecord.objects.filter(
+            numer=dane.get("numer"), user=invoice.user
+        ).exists():
             return HttpResponse(
                 "Taka faktura już istnieje w rejestrze VAT!", status=409
             )
 
-        Faktura.objects.create(
+        BillingRecord.objects.create(
             user=invoice.user,
             invoice=invoice,
             typ="sprzedazowa" if invoice.invoice_type == "income" else "kosztowa",
@@ -212,19 +214,19 @@ class ApproveInvoiceView(View):
 
 
 class InvoiceListView(LoginRequiredMixin, ListView):
-    model = Faktura
+    model = BillingRecord
     template_name = "vat_simulation/invoice_list.html"
     context_object_name = "faktury"
 
     def get_queryset(self):
-        return Faktura.objects.filter(user=self.request.user).order_by(
+        return BillingRecord.objects.filter(user=self.request.user).order_by(
             "-data_wystawienia"
         )
 
 
 class DeleteInvoiceView(View):
     def post(self, request, pk, *args, **kwargs):
-        faktura = get_object_or_404(Faktura, pk=pk)
+        faktura = get_object_or_404(BillingRecord, pk=pk)
         faktura.delete()
         return redirect("vat_simulation:rejestr_vat")
 
@@ -242,7 +244,7 @@ class ExportExcelView(View):
         data_od = request.GET.get("data_od")
         data_do = request.GET.get("data_do")
 
-        faktury = Faktura.objects.all()
+        faktury = BillingRecord.objects.all()
         if data_od and data_do and data_od != "None" and data_do != "None":
             faktury = faktury.filter(data_sprzedazy__range=[data_od, data_do])
 
