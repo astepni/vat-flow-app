@@ -27,7 +27,16 @@ urlpatterns = [
     path("users/", include("users.urls")),
     path("", TemplateView.as_view(template_name="landing.html"), name="landing"),
     path("dashboard/", include("dashboard.urls")),
+    path(
+        "dashboard/",
+        login_required(TemplateView.as_view(template_name="home.html")),
+        name="home",
+    ),
     path("invoices/", include("invoices.urls")),
+    path(
+        "dashboard/vat-simulation/",
+        include(("vat_simulation.urls", "vat_simulation"), namespace="vat_simulation"),
+    ),
     path("api/", include(("api.urls", "api"), namespace="api")),
 ]
 
