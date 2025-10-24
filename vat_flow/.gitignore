@@ -4,6 +4,8 @@ NOTES
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyo
+*.pyc
 
 # Virtual environments
 env/
@@ -11,6 +13,8 @@ venv/
 ENV/
 .venv/
 .env/
+env.bak/
+venv.bak/
 
 # Django stuff:
 *.log
@@ -19,6 +23,9 @@ db.sqlite3
 db.sqlite3-journal
 media/
 staticfiles/
+static/
+*.pot
+*.pdf
 
 # Python egg files
 *.egg-info/
@@ -55,3 +62,11 @@ Thumbs.db
 *.bak
 *.swp
 *.tmp
+
+# macOS specific
+.AppleDouble
+.LSOverride
+
+# Windows thumbnail cache
+ehthumbs.db
+Desktop.ini
