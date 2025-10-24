@@ -54,5 +54,4 @@ class DeleteInvoiceView(LoginRequiredMixin, DeleteView):
         faktury.delete()
         response = super().delete(request, *args, **kwargs)
         logger.info(f"Invoice usunięty: {self.object.pk}")
-
         return response

@@ -38,7 +38,6 @@
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <!-- Tabs available after login -->
-                        <li class="nav-item"><a class="nav-link" href="{% url 'invoices' %}">Dokumenty księgowe</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'vat_simulation' %}">Symulacja VAT</a></li>
 
                         <!-- Welcome and logout -->
