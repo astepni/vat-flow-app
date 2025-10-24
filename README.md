@@ -51,6 +51,7 @@ Below are sample screenshots presenting the core features and UX of VAT-flow:
 ### VAT Simulation Module
 ![VAT Simulation Module](images/VAT_simulation.png)
 ![VAT Simulation Module](images/VAT_register.png)
+![VAT Simulation Module](images/Excel.png)
 ![VAT Simulation Module](images/VAT_calculation.png)
 
 ### DRF API endpoint
