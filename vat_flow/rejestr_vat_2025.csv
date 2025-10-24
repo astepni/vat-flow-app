@@ -1,0 +1,3 @@
+﻿Data wystawienia,Data sprzedaży,Numer faktury,Kontrahent,Adres (siedziba),NIP,Wartość netto 8%,Podatek VAT 8%,Wartość brutto 8%,Wartość netto 23%,Podatek VAT 23%,Wartość brutto 23%,Suma wartość netto,Suma podatek VAT,Suma wartość brutto
+2025-09-01,2025-09-01,FV/2025/09/001,Firma XYZ,ul. Przykładowa 1,123-456-78-90,1000.00,80.00,1080.00,2000.00,460.00,2460.00,3000.00,540.00,3540.00
+2025-09-05,2025-09-05,FV/2025/09/002,Firma ABC,ul. Testowa 2,987-654-32-10,500.00,40.00,540.00,1500.00,345.00,1845.00,2000.00,385.00,2385.00

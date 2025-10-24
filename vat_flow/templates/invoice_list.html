@@ -24,8 +24,18 @@
                   </a>
                   <div class="text-muted small">Dodano: {{ invoice.uploaded_at }}</div>
                 </div>
-                <a href="{% url 'delete_invoice' invoice.pk %}" 
-                   class="btn btn-outline-danger btn-sm rounded-pill">Usuń</a>
+                <div>
+                  <form method="post" action="{% url 'vat_simulation:zatwierdz_fakture' invoice.pk %}" style="display:inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-success btn-sm rounded-pill">
+                      Zatwierdź do rejestru
+                    </button>
+                  </form>
+                  <form method="post" action="{% url 'delete_invoice' invoice.pk %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill">Usuń</button>
+                  </form>
+                </div>
               </li>
               {% endif %}
             {% empty %}
@@ -51,8 +61,18 @@
                   </a>
                   <div class="text-muted small">Dodano: {{ invoice.uploaded_at }}</div>
                 </div>
-                <a href="{% url 'delete_invoice' invoice.pk %}" 
-                   class="btn btn-outline-danger btn-sm rounded-pill">Usuń</a>
+                <div>
+                  <form method="post" action="{% url 'vat_simulation:zatwierdz_fakture' invoice.pk %}" style="display:inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-success btn-sm rounded-pill">
+                      Zatwierdź do rejestru
+                    </button>
+                  </form>
+                  <form method="post" action="{% url 'delete_invoice' invoice.pk %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill">Usuń</button>
+                  </form>
+                </div>
               </li>
               {% endif %}
             {% empty %}

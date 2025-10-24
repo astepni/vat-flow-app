@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">📑 Rejestr VAT</h2>
+        <p class="text-muted">Wybierz zakres dat i sprawdź rejestr VAT sprzedaży lub zakupów.</p>
+      </div>
+      <!-- Filters -->
+      <form method="get" class="row g-3 mb-4">
+        <div class="col-md-4">
+          <label for="data_od" class="form-label fw-semibold">Data sprzedaży od:</label>
+          <input type="date" id="data_od" name="data_od" class="form-control" value="{{ data_od }}">
+        </div>
+        <div class="col-md-4">
+          <label for="data_do" class="form-label fw-semibold">Data sprzedaży do:</label>
+          <input type="date" id="data_do" name="data_do" class="form-control" value="{{ data_do }}">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button type="submit" class="btn btn-primary w-100 rounded-pill btn-lg">
+            🔎 Filtruj
+          </button>
+        </div>
+      </form>
+
+      <!-- Export buttons -->
+      <div class="mb-4 d-flex justify-content-end">
+        <a href="{% url 'vat_simulation:export_excel' %}?data_od={{ data_od }}&data_do={{ data_do }}" class="btn btn-success rounded-pill btn-lg">
+          ⬇ Eksportuj do Excela
+        </a>
+      </div>
+
+      <!-- Bookmark -->
+      <ul class="nav nav-pills nav-justified mb-4" id="vatTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active rounded-pill" id="nalezny-tab" data-bs-toggle="tab" 
+                  data-bs-target="#nalezny" type="button" role="tab" 
+                  aria-controls="nalezny" aria-selected="true">
+            💰 Rejestr VAT sprzedaży
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-pill" id="naliczony-tab" data-bs-toggle="tab" 
+                  data-bs-target="#naliczony" type="button" role="tab" 
+                  aria-controls="naliczony" aria-selected="false">
+            📥 Rejestr VAT zakupów
+          </button>
+        </li>
+      </ul>
+      <!-- Bookmark content -->
+      <div class="tab-content" id="vatTabsContent">
+        <!-- Sales -->
+        <div class="tab-pane fade show active" id="nalezny" role="tabpanel" aria-labelledby="nalezny-tab">
+          <h5 class="fw-bold mb-3">Faktury sprzedażowe</h5>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle">
+              <thead class="table-primary text-center">
+                <tr>
+                  <th>Nr faktury</th>
+                  <th>Data wystawienia</th>
+                  <th>Data sprzedaży</th>
+                  <th>Kontrahent</th>
+                  <th>Adres</th>
+                  <th>Brutto 23%</th>
+                  <th>VAT 23%</th>
+                  <th>Netto 23%</th>
+                  <th>Brutto 8%</th>
+                  <th>VAT 8%</th>
+                  <th>Netto 8%</th>
+                  <th>Suma netto</th>
+                  <th>Suma VAT</th>
+                  <th>Suma brutto</th>
+                  <th>Akcje</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for f in sprzedazowe_lista %}
+                <tr>
+                  <td>{{ f.numer }}</td>
+                  <td>{{ f.data_wystawienia }}</td>
+                  <td>{{ f.data_sprzedazy }}</td>
+                  <td>{{ f.kontrahent }}</td>
+                  <td>{{ f.adres_siedziba }}</td>
+                  <td>{{ f.wart_brutto_23|default:"-" }}</td>
+                  <td>{{ f.podatek_vat_23|default:"-" }}</td>
+                  <td>{{ f.wart_netto_23|default:"-" }}</td>
+                  <td>{{ f.wart_brutto_8|default:"-" }}</td>
+                  <td>{{ f.podatek_vat_8|default:"-" }}</td>
+                  <td>{{ f.wart_netto_8|default:"-" }}</td>
+                  <td>{{ f.suma_wart_netto|default:"-" }}</td>
+                  <td>{{ f.suma_podatek_vat|default:"-" }}</td>
+                  <td>{{ f.suma_wart_brutto|default:"-" }}</td>
+                  <td>
+                    <form method="post" action="{% url 'vat_simulation:usun_fakture' f.pk %}" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Czy na pewno usunąć fakturę?')">Usuń</button>
+                    </form>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="15" class="text-center text-muted">Brak faktur sprzedażowych w tym okresie.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Purchases -->
+        <div class="tab-pane fade" id="naliczony" role="tabpanel" aria-labelledby="naliczony-tab">
+          <h5 class="fw-bold mb-3">Faktury kosztowe</h5>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle">
+              <thead class="table-success text-center">
+                <tr>
+                  <th>Nr faktury</th>
+                  <th>Data wystawienia</th>
+                  <th>Data sprzedaży</th>
+                  <th>Kontrahent</th>
+                  <th>Adres</th>
+                  <th>Brutto 23%</th>
+                  <th>VAT 23%</th>
+                  <th>Netto 23%</th>
+                  <th>Brutto 8%</th>
+                  <th>VAT 8%</th>
+                  <th>Netto 8%</th>
+                  <th>Suma netto</th>
+                  <th>Suma VAT</th>
+                  <th>Suma brutto</th>
+                  <th>Akcje</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for f in kosztowe_lista %}
+                <tr>
+                  <td>{{ f.numer }}</td>
+                  <td>{{ f.data_wystawienia }}</td>
+                  <td>{{ f.data_sprzedazy }}</td>
+                  <td>{{ f.kontrahent }}</td>
+                  <td>{{ f.adres_siedziba }}</td>
+                  <td>{{ f.wart_brutto_23|default:"-" }}</td>
+                  <td>{{ f.podatek_vat_23|default:"-" }}</td>
+                  <td>{{ f.wart_netto_23|default:"-" }}</td>
+                  <td>{{ f.wart_brutto_8|default:"-" }}</td>
+                  <td>{{ f.podatek_vat_8|default:"-" }}</td>
+                  <td>{{ f.wart_netto_8|default:"-" }}</td>
+                  <td>{{ f.suma_wart_netto|default:"-" }}</td>
+                  <td>{{ f.suma_podatek_vat|default:"-" }}</td>
+                  <td>{{ f.suma_wart_brutto|default:"-" }}</td>
+                  <td>
+                    <form method="post" action="{% url 'vat_simulation:usun_fakture' f.pk %}" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Czy na pewno usunąć fakturę?')">Usuń</button>
+                    </form>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="15" class="text-center text-muted">Brak faktur kosztowych w tym okresie.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock extra_js %}
