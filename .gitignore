@@ -26,6 +26,9 @@ staticfiles/
 static/
 *.pot
 *.pdf
+images/
+
+
 
 # Python egg files
 *.egg-info/
