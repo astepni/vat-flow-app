@@ -1,0 +1,202 @@
+[33mcommit c5045a9dcaefa51f19b245efb3f864eaa84a6832[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32msupport/general-refactoring[m[33m, [m[1;31morigin/feature/unit-tests[m[33m, [m[1;32mfeature/unit-tests[m[33m)[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Mon Oct 20 08:41:26 2025 +0200
+
+    test: add unit tests for dashboard
+
+[33mcommit 1c0f460bf1188783e8ef5a4deba8ec781e5733af[m[33m ([m[1;31morigin/support/general-refactoring[m[33m)[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Fri Oct 10 17:26:46 2025 +0200
+
+    refactor: improve code readability
+
+[33mcommit 9bc0bb8d51fc25d1ba02748c86c2da831b1e0c29[m
+Merge: 99bb820 4d15d16
+Author: Agnieszka Stępniewska <jogglepromotion@gmail.com>
+Date:   Wed Oct 8 19:16:12 2025 +0200
+
+    Merge pull request #7 from astepni/feature/nip-validation-api
+    
+    feat: add NIP verification endpoint
+
+[33mcommit 4d15d16b72129109fccdbe888b820d875ba9d04c[m[33m ([m[1;31morigin/feature/nip-validation-api[m[33m, [m[1;32mfeature/nip-validation-api[m[33m)[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Wed Oct 8 14:23:53 2025 +0200
+
+    feat: add NIP verification endpoint
+
+[33mcommit 99bb82053d6be110dcffa647d4e3798836fc2f49[m
+Merge: a56c238 e723002
+Author: Agnieszka Stępniewska <jogglepromotion@gmail.com>
+Date:   Wed Oct 8 10:21:43 2025 +0200
+
+    Merge pull request #6 from astepni/feature/VAT-simulation
+    
+    feat: create VAT register module with Excel export, filtering, and pu…
+
+[33mcommit e72300250ac86f20c7a0ec2852a450793b191f32[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Tue Oct 7 21:08:21 2025 +0200
+
+    refactor: address feedback and requested changes from pull request
+
+[33mcommit b6b0afe93e5a577975ee8ca0c044bedf6c0abf3a[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Tue Oct 7 15:09:31 2025 +0200
+
+    feat: add VAT register feature
+
+[33mcommit e8833ced8cd78db082ed43b77093998e2da43614[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Sun Oct 5 12:01:04 2025 +0200
+
+    feat: create VAT register module with Excel export, filtering, and purchase/sales tabs
+
+[33mcommit a56c238256b201d26839512f604c743158e07233[m
+Merge: 2de72e8 fd97d89
+Author: Agnieszka Stępniewska <jogglepromotion@gmail.com>
+Date:   Thu Oct 2 23:26:10 2025 +0200
+
+    Merge pull request #5 from astepni/feature/dashboard-cards
+    
+    Feature/dashboard cards
+
+[33mcommit fd97d892a6543075014e431e8b8b49f32f386ad2[m[33m ([m[1;31morigin/feature/dashboard-cards[m[33m, [m[1;32mfeature/dashboard-cards[m[33m)[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Thu Oct 2 20:32:42 2025 +0200
+
+    feat: add VAT settlement option
+
+[33mcommit 8c007de7397a26b6ce684321666798cd6d976258[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Thu Oct 2 20:01:57 2025 +0200
+
+    feat: add VAT verification template
+
+[33mcommit 2de72e82fb5655cc653c6032f43a1a66b4bbc7ed[m
+Merge: f553480 74309d7
+Author: Agnieszka Stępniewska <jogglepromotion@gmail.com>
+Date:   Fri Sep 26 19:22:55 2025 +0200
+
+    Merge pull request #3 from astepni/feature/user-invoice-management
+    
+    feat: add invoices management
+
+[33mcommit f553480b1b8823d34ffe5ae5d9bf1c1368bf9a93[m
+Merge: e3d2ff0 79f78d5
+Author: Agnieszka Stępniewska <jogglepromotion@gmail.com>
+Date:   Fri Sep 26 19:22:37 2025 +0200
+
+    Merge pull request #4 from astepni/feature/dashboard-cards
+    
+    feat: improve profile.html UI and layout
+
+[33mcommit 8aae5df13ab01d0ce59dd8a323e71bddb16c798e[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Fri Sep 26 16:03:30 2025 +0200
+
+    WIP: save untracked changes before checkout
+
+[33mcommit 79f78d5018408236ad919159a3c7cf0eb3b3d668[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Fri Sep 26 15:59:27 2025 +0200
+
+    feat: improve profile.html UI and layout. English comments
+
+[33mcommit 869a60253c84ad2f0a10d10f9bb0bd5e443e7518[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Fri Sep 26 15:47:50 2025 +0200
+
+    feat: improve profile.html UI and layout
+
+[33mcommit 74309d71212641b9de4a6f15e811e2e5bb1c4cc9[m[33m ([m[1;31morigin/feature/user-invoice-management[m[33m, [m[1;32mfeature/user-invoice-management[m[33m)[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Fri Sep 26 15:28:05 2025 +0200
+
+    refactor: convert function-based views to class-based views
+
+[33mcommit cea56c7f675f346cd1fc4bb3cdf1748e102470a6[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Thu Sep 25 20:53:13 2025 +0200
+
+    feat: add PDF upload and user-linked invoice viewing
+
+[33mcommit 2b0541f8faed644442fbd6cc17cae33feb98d23b[m
+Merge: fa56303 e3d2ff0
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Tue Sep 23 22:34:14 2025 +0200
+
+    fix: resolve merge conflicts
+
+[33mcommit e3d2ff00d5152594c0c63136edea350ffbc17538[m
+Merge: 0fb1dd2 68bb6c1
+Author: Agnieszka Stępniewska <jogglepromotion@gmail.com>
+Date:   Tue Sep 23 19:29:05 2025 +0200
+
+    Merge pull request #2 from astepni/feature/dashboard-cards
+    
+    Feature/dashboard cards
+
+[33mcommit 68bb6c14922816e7b5b0bb92a4577e5f3977f0db[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Tue Sep 23 13:49:10 2025 +0200
+
+    cr: address comments
+
+[33mcommit fa56303eabf9a093bcc6ea5d1876b55681088c3b[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Mon Sep 22 12:21:58 2025 +0200
+
+    chore: temporarily save local changes for branch switch
+
+[33mcommit cdf730a18dc80f99e4290faf6a9f62890ad0fd0f[m
+Merge: f507f8a 0fb1dd2
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Fri Sep 12 13:38:38 2025 +0200
+
+    Merge remote-tracking branch 'origin/main' into feature/dashboard-cards
+
+[33mcommit f507f8ac1210265718bb3a982107a8e76eec8ae8[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Wed Sep 10 03:33:32 2025 +0200
+
+    chore: add db.sqlite3 to .gitignore
+
+[33mcommit 7415975c58ce47f124646e38a812dc1334d9b0fd[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Wed Sep 10 02:59:26 2025 +0200
+
+    chore: remove db.sqlite3 from repository
+
+[33mcommit ef2b893d1178adef5c3b150a70842ef3d764ec12[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Wed Sep 10 02:52:19 2025 +0200
+
+    feat: add Profile, Accounting Docs and VAT Simulation tabs; adjust user page post-login
+
+[33mcommit 0fb1dd24f8f40ac4062a5dbb2755242e6dcfb03e[m
+Merge: d9a8de2 c7b6413
+Author: Agnieszka Stępniewska <jogglepromotion@gmail.com>
+Date:   Tue Sep 9 12:31:55 2025 +0200
+
+    Merge pull request #1 from astepni/feature/add-authentication
+    
+    feat: add registraion and login
+
+[33mcommit c7b6413ccb69dba42104d457b6adac225e46ee96[m[33m ([m[1;31morigin/feature/add-authentication[m[33m, [m[1;32mfeature/add-authentication[m[33m)[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Tue Sep 9 00:04:48 2025 +0200
+
+    feat: improve frontend for login and registration
+
+[33mcommit b21c397240e930dfb7157bf3d8903b73bbe8bf7d[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Fri Sep 5 13:30:30 2025 +0200
+
+    feat: add registraion and login
+
+[33mcommit d9a8de2907476b7cba951bc772810c09141dca71[m
+Author: astepni <agnieszkastepniewska@o2.pl>
+Date:   Mon Jul 7 18:36:08 2025 +0200
+
+    feat: initial structure
