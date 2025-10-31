@@ -7,7 +7,6 @@ __pycache__/
 *.pyo
 *.pyc
 
-
 # Virtual environments
 env/
 venv/
@@ -16,7 +15,6 @@ ENV/
 .env/
 env.bak/
 venv.bak/
-
 
 # Django stuff:
 *.log
@@ -28,6 +26,8 @@ staticfiles/
 static/
 *.pot
 *.pdf
+images/
+
 
 
 # Python egg files
@@ -73,4 +73,3 @@ Thumbs.db
 # Windows thumbnail cache
 ehthumbs.db
 Desktop.ini
-
