@@ -17,6 +17,4 @@ class AccountingDocumentsViewTests(TestCase):
         response = self.client.get("/invoices/")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Twoje dokumenty księgowe")
-        self.assertContains(
-            response, "Dodaj dokument księgowy"
-        )  # Sprawdza obecność przycisku z ekranu
+        self.assertContains(response, "Dodaj dokument księgowy")

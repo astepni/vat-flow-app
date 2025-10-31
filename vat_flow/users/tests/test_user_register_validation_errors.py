@@ -23,7 +23,7 @@ class UserRegistrationValidationTests(TestCase):
             "form",
             "password2",
             "Hasło jest za krótkie lub nie spełnia wymagań.",
-        )  # lub dokładny komunikat własny
+        )
 
     def test_duplicate_username_shows_error(self):
         response = self.client.post(

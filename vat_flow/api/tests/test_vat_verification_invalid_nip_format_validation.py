@@ -10,17 +10,14 @@ class VatVerificationInvalidNipValidationTests(TestCase):
 
     def test_vat_verification_invalid_nip_format_shows_error(self):
         self.client.login(username="testuser", password="testpass")
-        # NIP za krótki
         response_short = self.client.post("/api/vat-verification/", {"nip": "123"})
         self.assertContains(response_short, "Nieprawidłowy format NIP")
 
-        # NIP za długi
         response_long = self.client.post(
             "/api/vat-verification/", {"nip": "12345678901234"}
         )
         self.assertContains(response_long, "Nieprawidłowy format NIP")
 
-        # NIP z literami
         response_letter = self.client.post(
             "/api/vat-verification/", {"nip": "12ab56789"}
         )
