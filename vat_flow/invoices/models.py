@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from storages.backends.s3boto3 import S3Boto3Storage
 
 
 class Invoice(models.Model):
@@ -9,7 +10,7 @@ class Invoice(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    pdf = models.FileField(upload_to="invoices/")
+    pdf = models.FileField(upload_to="invoices/", storage=S3Boto3Storage())
     invoice_type = models.CharField(max_length=10, choices=RECORD_TYPE_CHOICES)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 

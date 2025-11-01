@@ -23,6 +23,8 @@ class UploadInvoiceView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        print("PDF Storage backend:", type(form.instance.pdf.storage))
+        print("PDF Storage:", form.instance.pdf.storage)
         return super().form_valid(form)
 
 
