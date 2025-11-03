@@ -5,3 +5,6 @@ django-environ
 djangorestframework
 openpyxl
 requests
+djangorestframework-simplejwt
+django-storages
+boto3
