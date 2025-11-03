@@ -10,7 +10,7 @@
           Czy na pewno chcesz usunąć tę fakturę?
         </p>
 
-        <form method="post" class="mt-4 d-flex justify-content-center gap-3">
+        <form method="post" action="{% url 'delete_invoice' invoice.id %}" class="mt-4 d-flex justify-content-center gap-3">
           {% csrf_token %}
           <button type="submit" class="btn btn-danger btn-lg rounded-pill shadow-sm">
             🗑️ Tak, usuń
@@ -19,6 +19,7 @@
             ❌ Anuluj
           </a>
         </form>
+        
       </div>
     </div>
   </div>

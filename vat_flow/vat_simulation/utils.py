@@ -1,8 +1,10 @@
 import csv
+import io
 import re
 from datetime import datetime
 
 import fitz
+from django.core.files.storage import default_storage
 
 from .models import BillingRecord
 
@@ -22,19 +24,40 @@ class Utils:
 
 
 class InvoiceParser:
-    def __init__(self, pdf_path: str):
-        self.pdf_path = pdf_path
+    def __init__(self, pdf_file):
+        self.pdf_file = pdf_file
         self.text = self._extract_text()
 
-    def _extract_text(self) -> str:
-        doc = fitz.open(self.pdf_path)
-        return "".join(page.get_text() for page in doc)
+    def _extract_text(self):
+        """Wyciąga tekst z pliku PDF przy użyciu PyMuPDF"""
+        if not self.pdf_file:
+            print("Brak pliku PDF – pole pdf_file jest puste.")
+            return ""
+
+        try:
+            with self.pdf_file.open("rb") as f:
+                pdf_bytes = io.BytesIO(f.read())
+                doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+                text = ""
+                for page in doc:
+                    text += page.get_text("text")
+                doc.close()
+            return text
+
+        except FileNotFoundError:
+            print(f"Plik PDF {self.pdf_file.name} nie istnieje w storage.")
+            return ""
+
+        except Exception as e:
+            print(f"Błąd przy otwieraniu PDF: {e}")
+            return ""
 
     def _search(self, pattern: str):
         match = re.search(pattern, self.text, re.IGNORECASE)
         return match.group(1).strip() if match else None
 
     def get_data(self) -> dict:
+        """Wyszukuje dane faktury w tekście PDF"""
         suma_netto = self._search(r"Suma wartość netto[:\s]*([\d\s.,]+)")
         suma_vat = self._search(r"suma podatek VAT[:\s]*([\d\s.,]+)")
         suma_brutto = self._search(r"suma wartość brutto[:\s]*([\d\s.,]+)")

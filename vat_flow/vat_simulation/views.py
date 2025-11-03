@@ -35,7 +35,9 @@ class VATViewRegister(TemplateView):
 
         sprzedazowe_lista = []
         for f in sprzedazowe:
-            dane = InvoiceParser(f.plik_pdf.path).get_data()
+            print(f.plik_pdf.storage)
+            print(f.plik_pdf.url)
+            dane = InvoiceParser(f.plik_pdf).get_data()
             sprzedazowe_lista.append(
                 {
                     **dane,
@@ -46,7 +48,7 @@ class VATViewRegister(TemplateView):
 
         kosztowe_lista = []
         for f in kosztowe:
-            dane = InvoiceParser(f.plik_pdf.path).get_data()
+            dane = InvoiceParser(f.plik_pdf).get_data()
             kosztowe_lista.append(
                 {
                     **dane,
@@ -148,7 +150,7 @@ class ImportInvoicesView(FormView):
 class ApproveInvoiceView(View):
     def post(self, request, pk, *args, **kwargs):
         invoice = get_object_or_404(Invoice, pk=pk)
-        dane = InvoiceParser(invoice.pdf.path).get_data()
+        dane = InvoiceParser(invoice.pdf).get_data()
         raw_data_wystawienia = dane.get("data_wystawienia")
         raw_data_sprzedazy = dane.get("data_sprzedazy")
 

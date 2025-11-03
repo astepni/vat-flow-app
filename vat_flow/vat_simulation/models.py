@@ -3,6 +3,7 @@ from datetime import date
 from django.contrib.auth.models import User
 from django.db import models
 from invoices.models import Invoice
+from storages.backends.s3boto3 import S3Boto3Storage
 
 
 class BillingRecord(models.Model):
@@ -11,7 +12,7 @@ class BillingRecord(models.Model):
         ("kosztowa", "Kosztowa"),
     )
     typ = models.CharField(max_length=20, choices=INVOICE_TYPE_CHOICES)
-    plik_pdf = models.FileField(upload_to="faktury_pdfs/")
+    plik_pdf = models.FileField(upload_to="faktury_pdfs/", storage=S3Boto3Storage())
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     invoice = models.ForeignKey(
         Invoice, null=True, blank=True, on_delete=models.SET_NULL
