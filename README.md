@@ -74,7 +74,9 @@ Below are sample screenshots presenting the core features and UX of VAT-flow:
 
 ### Containerization with Docker
 
-![Containerization with Docker](images/AWS.png)
+![Containerization with Docker](images/Docker_2.png)
+![Containerization with Docker](images/Docker_1.png)
+![Containerization with Docker](images/Docker_3.png)
 
 ## Installation & Setup
 
