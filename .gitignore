@@ -27,7 +27,7 @@ staticfiles/
 static/
 *.pot
 *.pdf
-images/
+
 
 
 
