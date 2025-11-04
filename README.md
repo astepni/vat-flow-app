@@ -78,20 +78,88 @@ Below are sample screenshots presenting the core features and UX of VAT-flow:
 ![Containerization with Docker](images/Docker_1.png)
 ![Containerization with Docker](images/Docker_3.png)
 
-## Installation & Setup
-
-Clone the repository and set up your local environment:
-
-git clone [https://github.com/astepni/vat-flow-app.git](https://github.com/astepni/vat-flow-app.git)  
-cd vat-flow-app  
-python -m venv venv  
-source venv/bin/activate # On Windows: .\venv\Scripts\activate  
-pip install -r requirements.txt  
-python manage.py migrate  
-python manage.py runserver
+## Installation & Setup (Docker)
 
 
-Open your browser at `http://localhost:8000` to start using VAT-flow.
+### 1. Clone the repository
+
+Open your terminal and run:
+
+  
+
+    git clone https://github.com/astepni/vat-flow-app.git
+    cd vat-flow-app
+
+  
+
+    
+
+### 2. Create and activate virtual environment (optional)
+
+Creating a virtual environment is optional here because the app runs inside Docker containers. However, if you need it for running local scripts, you can do:
+
+  
+
+**On Linux/macOS:**
+
+  
+
+    python -m venv .venv
+    source .venv/bin/activate
+    
+      
+
+**On Windows PowerShell:**
+
+  
+
+    python -m venv .venv
+    .\.venv\Scripts\Activate.ps1
+
+### 3. Build and start Docker containers
+
+Make sure Docker Desktop is installed and running. Run:
+
+
+    docker-compose up -d --build
+
+This command will build the images and start the application and database containers.
+
+
+### 4. Verify containers are running
+
+Check the running containers with:
+
+    docker ps
+
+You should see at least two containers running: 
+
+ - `vat_flow-web-1 (Django application)`
+ -  `vat_flow-db-1 (PostgreSQL database)`
+
+  
+
+### 5. Access the application
+
+Open your web browser and go to:
+
+    http://localhost:8000
+
+###  6. Test user credentials
+
+Use the following to log in:
+
+**Username:** testuser
+
+**Password:** haslotest1234
+
+and click "Zaloguj się":
+
+![Login](images/login.png)
+  
+
+### !!! Important Note
+Local running via `python manage.py runserver` currently generates database errors and is not supported. Please use Docker for running the application reliably.
 
 ## Contribution Guidelines
 
