@@ -10,7 +10,7 @@ The entire application stack is containerized and automated using Docker Compose
 
 ## Technology Stack
 
-- **Backend:** `Python` 3.12.7, `Django` 5.2.4, Django REST Framework.
+- **Backend:** `Python` 3.13.9, `Django` 5.2.4, Django REST Framework.
 - **Frontend:** `Bootstrap` 5.3.x, HTML5, CSS3.
 - **Database:** `PostgreSQL`.
 - **Cloud Storage:** Amazon S3 for file storage and backups.
